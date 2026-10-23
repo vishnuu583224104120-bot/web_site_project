@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventify – Discover and Register for Events</title>
+    <meta name="description" content="Browse upcoming events in Coimbatore and register in seconds.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <a href="#top" class="logo">Eventify</a>
+        <nav aria-label="Main">
+            <a href="#events">Events</a>
+            <a href="#registrations">My registrations</a>
+        </nav>
+    </header>
+
+    <main id="top">
+
+        <section class="hero">
+            <h1>Find your next event.<br>Save your seat in a minute.</h1>
+            <p>Workshops, summits, music nights and sports meets happening around Coimbatore.</p>
+            <a href="#events" class="primary-button">Browse events →</a>
+        </section>
+
+        <section id="events" class="section">
+            <div class="section-head">
+                <h2>Upcoming events</h2>
+                <span id="eventCount" class="pill">0 Events</span>
+            </div>
+
+            <div class="filters">
+                <label class="sr-only" for="searchInput">Search events</label>
+                <input type="search" id="searchInput" placeholder="Search by title, place or category">
+
+                <label class="sr-only" for="categoryFilter">Filter by category</label>
+                <select id="categoryFilter">
+                    <option value="All">All categories</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Business">Business</option>
+                    <option value="Music">Music</option>
+                    <option value="Education">Education</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Art">Art</option>
+                </select>
+            </div>
+
+            <div id="eventGrid" class="event-grid"></div>
+
+            <div id="emptyState" class="empty-state" hidden>
+                <p style="font-size: 32px;">🔍</p>
+                <h3>No events found</h3>
+                <p>Try a different keyword or choose another category.</p>
+            </div>
+        </section>
+
+        <section id="registrations" class="section">
+            <div class="section-head">
+                <h2>My registrations</h2>
+                <span id="registrationCount" class="pill">0 Registered</span>
+            </div>
+
+            <div id="registrationList" class="registration-list"></div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>© <span id="year"></span> Eventify. Demo project – registrations are stored only in your browser.</p>
+    </footer>
+
+    <!-- Registration modal -->
+    <div id="registrationModal" class="modal" hidden>
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button type="button" id="closeModal" class="close-button" aria-label="Close">&times;</button>
+
+            <h2 id="modalTitle">Register for event</h2>
+            <p id="modalEventName" class="modal-sub"></p>
+
+            <form id="registrationForm" novalidate>
+                <input type="hidden" id="selectedEventId">
+
+                <label for="fullName">Full name</label>
+                <input type="text" id="fullName" required minlength="2" autocomplete="name">
+
+                <label for="email">Email</label>
+                <input type="email" id="email" required autocomplete="email">
+
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" required pattern="[0-9+\-\s]{10,15}" title="Enter a valid phone number" autocomplete="tel">
+
+                <label for="attendees">Number of attendees</label>
+                <input type="number" id="attendees" min="1" max="10" value="1" required>
+
+                <button type="submit" class="primary-button full">Confirm registration</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
